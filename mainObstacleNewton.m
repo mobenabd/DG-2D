@@ -10,7 +10,7 @@ h     = 1/n;
 sigma =  100;
 eps   =  -1;
 k     =  3;
-dt    = h^2/4;
+
 
 f    =  @(x,y,t) x.*0;
 g = @(x,y,t) obstacle(x,y);
@@ -47,7 +47,7 @@ while (res > 1e-8)
      
     
     %  Compute jacobian matrix dG
-    %dG = Da*invMass*A + Db;
+    %dG = Da*invMass*A + Db;  %%% sans changement de varibale
     dG = Da*A + Db;
     
   
@@ -58,7 +58,7 @@ while (res > 1e-8)
     U = Uold + U;
     
     
-    plot_sol(n,k,t*dt, U, g, u_final);
+    plot_sol(n,k,0., U, g, u_final);
     
     
     res = h*sqrt(sum((U-Uold).^2));
@@ -69,7 +69,7 @@ end
 fprintf('\n')
 
 compute_error(U,@(x,y) final_sol(x,y),n,k)
-plot_sol(n,k,t*dt, U, g, u_final);
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
