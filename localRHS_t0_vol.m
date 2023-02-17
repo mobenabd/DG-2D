@@ -15,6 +15,6 @@ u0Mapped  =  func_mapping(u0,n,num);
 [~,~, detJac] = jacobian_elem(1,n);    % (uniforme grid)
 for i=1:Nloc
     [phi,~, ~] = basis(i,n,k);
-    b(i) = detJac * quadrature(@(x,y) u0Mapped(x,y).*phi(x,y),2);
+    b(i) = detJac * quadrature(@(x,y) u0Mapped(x,y).*phi(x,y),2,5);
 end
 end

@@ -1,67 +1,79 @@
 clear; clc; close all;
-%%%%%%%%%%%%%%%  Solve u_t-Δu = f in Ω = [0,1].^2 %%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%         u = u_0  in Ω at t=0      %%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%         u = g on ∂Ω               %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Solve min(-Δu, u-g)=0 in Ω = [0,1].^2 %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%  with semismooth newton algorithm      %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% using DG methods with Lgarange basis on quadrature nodes %%%%
+%%%%%%%%%%%%%         u = u_final on ∂Ω              %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-n     =  20;
+global k
+n     =  10;
 h     = 1/n;
 sigma =  100;
-eps   =  1;
-k     =  1;
+eps   =  -1;
+k     =  3;
 dt    = h^2/4;
 
 f    =  @(x,y,t) x.*0;
 g = @(x,y,t) obstacle(x,y);
 u_final = @(x,y,t) final_sol(x,y);
 
-%%% Solve with SemiSmooth Newton %%%%%%%%%%%%%%%%%%%%%
+%%%%% Initialization %%%%%%%%%%%%%%%%%%%%%
 [A,Mass] = MatricesSystem(n,sigma,eps,k);
-%initial contition
+invMass = diag(diag(Mass).^-1);  %%=M^-1 where M is diago,al
+
 b = SourceBCSystem(n,sigma,eps,k,g,f,0.0);
-U = Mass\b;
-plot_sol(n,k,0, U, g, u_final);
+g_projected = diag(invMass).*b;
 
-return
+plot_sol(n,k,0, g_projected, g, u_final);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-gdim = length(U);
+gdim = n^2*(k+1)^2;
 G = zeros(gdim,1);
 dG = zeros(gdim,gdim);
-
 Uold = zeros(gdim,1);
-g_projected = zeros(gdim,1);
-g_projected = U;
+U = g_projected;
+
 res = 1;
 t=1;
 %U = ones(gdim,1);
+b = SourceBCSystem(n,sigma,eps,k,g,f,1.);
 while (res > 1e-8)
-    b = SourceBCSystem(n,sigma,eps,k,g,f,t*dt);
-    G = A*U - b;
-    %compute H && Da && Db: %a=-lap(u)-f   %b=u-g
-    [G,Da,Db] = updateNewton_obstacle(n,k, G, U, g);
+    %compute G[u^k] = -Lap(u^k): use compute_Lap() if a(u^k)=-Lap(u^k)-f and f is not null
+    G = A*U - b; 
+    %G = diag(invMass).*G; %%% sans changement de varibale
     
+    %compute G[u^k] = min(a(u^k), b(u^k)) && Da && Db where %a(u^k)=-Lap(u^k), b(u^k)=u^k-g
+    [G,Da,Db] = updateNewton_obstacle(n,k, G, U,g_projected, g);
+     
     
-    %  Compute dH(u^k)
+    %  Compute jacobian matrix dG
+    %dG = Da*invMass*A + Db;
     dG = Da*A + Db;
     
+  
     Uold = U;
+    
+    %U = -gmres(dG,G,[], 1e-12, 1000);
     U = -dG\G;
     U = Uold + U;
     
     
-    
-    %plot_sol(U, u_final,n,k,t*dt,1);
     plot_sol(n,k,t*dt, U, g, u_final);
+    
+    
     res = h*sqrt(sum((U-Uold).^2));
-    
-    
     t = t + 1;
     fprintf('res=%f, counter=%i\n', res, t);
   
 end
 fprintf('\n')
 
+compute_error(U,@(x,y) final_sol(x,y),n,k)
+plot_sol(n,k,t*dt, U, g, u_final);
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function out = obstacle(tx,ty)
 x = 4*tx-2;
@@ -75,9 +87,9 @@ else
     out = -1;
 end
 
-%return
+
 if ((x==-2 ||  x==2 || y==-2 || y==2))
-    out =  final_sol(tx,ty);
+    out = final_sol(tx,ty);
 end
 end
 

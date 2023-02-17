@@ -1,12 +1,12 @@
 function plot_sol(n,k,t, U, g, uexct)
-%%% Plot solution %%%%%%%%%%%%%
+%%% Plot solution od the obstacle problem %%%%%%%%%%%%%
 %%% plt=1 for 1D plot on y=0.5 and exact solution exists
 %%% plt=2 for 2D plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-dx = 1/n;
+%dx = 1/n;
 
-%dx= 0.01;
+dx= 0.01;
 
 
 if  ~exist('uexct','var')
@@ -28,7 +28,7 @@ f = figure (1);
 %f.Position
 f.Position(3:4) = [1100 600];
 subplot(122)
-plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 20,'LineWidth',1)
+plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
 hold on
 if exist('uexct','var')
     plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exacte')
@@ -41,7 +41,8 @@ title('at y=0.5')
 hold off
     
 
-dx= 0.01;
+dx= 1/n;
+dx= dx/2;
 x = 0:dx:1;
 y = 0:dx:1;
 [X,Y] = meshgrid(x,y);
