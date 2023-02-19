@@ -1,4 +1,8 @@
 # Obstacle-Problem-DG-2D
 
-Solve 2D obstacle problem and 2D Heat equation with arbitrary high order DG, Lagrange basis.
+Arbitrary high order DG solver, Lagrange basis.
+
+Solve 2D obstacle problem with Newton semismooth method.
+
+Solve 2D Heat equation with Backward Euler scheme in time.
 
