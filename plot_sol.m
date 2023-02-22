@@ -1,5 +1,5 @@
 function plot_sol(n,k,t, U, g, uexct)
-%%% Plot solution od the obstacle problem %%%%%%%%%%%%%
+%%% Plot solution of the obstacle problem %%%%%%%%%%%%%
 %%% plt=1 for 1D plot on y=0.5 and exact solution exists
 %%% plt=2 for 2D plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,7 +13,6 @@ if  ~exist('uexct','var')
     uexct = g;
 end
 
-%%% Exact solution known %%%%%%%
 
 x = 0:dx:1;
 M = zeros(length(x),1);
@@ -36,13 +35,14 @@ else
    plot(x, Mexct,'LineWidth',1 ,'DisplayName', 'Obstacle')
 end
 legend('-DynamicLegend')
-axis([0 1 -1.5 1.5])
+%axis([0 1 -1.5 1.5])
 title('at y=0.5')
 hold off
     
 
-dx= 1/n;
-dx= dx/2;
+%dx= 1/n;
+%dx= dx/2;
+dx = dx*2;
 x = 0:dx:1;
 y = 0:dx:1;
 [X,Y] = meshgrid(x,y);
@@ -55,7 +55,7 @@ end
 
         
 subplot(121)
-surf(X,Y,M);%,'EdgeColor','none')
+surf(X,Y,M,'EdgeColor','none')
 colorbar
 title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
 

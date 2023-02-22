@@ -2,6 +2,7 @@ function val = Lagrange(x,i,k,derv)
 %%%%%%%%%%%% Lagrange polynomials %%%%%%%%%%%%%%%%
 %%%%%%%%%%%% derv=0: polynomial
 %%%%%%%%%%%% derv=1: first deriviative
+%%%%%%%%%%%% derv=2: second deriviative
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

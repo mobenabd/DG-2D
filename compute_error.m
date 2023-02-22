@@ -2,6 +2,7 @@ function compute_error(U,u_exct,n,k)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Compute L2 error with respect to the exact solution %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 dx= 0.01;
 x = 0:dx:1;
 y = 0:dx:1;

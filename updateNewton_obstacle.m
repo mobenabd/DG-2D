@@ -1,7 +1,7 @@
 function [G, Da, Db]= updateNewton_obstacle(n,k, G, U, g_projected, obstacle_g)
 %%%%%%%%% Update Newton vector A*U-rhs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%% using the obstacle g  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%% this uses 'obstacle_g' function if it's avaible %%%%%%%%%%%%%%%%%
+%%%%%%%%% this will use 'obstacle_g' function if it is available %%%%%%%%%%
 %%%%%%%%% otherwise: use the L2 projection 'g_projected' %%%%%%%%%%%%%%%%%%
 % elem: element number
 % n   : global discretisation
