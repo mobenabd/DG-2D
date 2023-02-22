@@ -1,4 +1,4 @@
-function plot_sol(n,k,t, U, g, uexct)
+function plot_sol(n,k, U, g, uexct)
 %%% Plot solution of the obstacle problem %%%%%%%%%%%%%
 %%% plt=1 for 1D plot on y=0.5 and exact solution exists
 %%% plt=2 for 2D plot
@@ -19,7 +19,7 @@ M = zeros(length(x),1);
 Mexct = zeros(length(x),1);
 for i = 1:length(x)
     M(i)     = compute_sol(x(i),0.5,U,n,k);
-    Mexct(i) = uexct(x(i),0.5,t);
+    Mexct(i) = uexct(x(i),0.5,0);
 end
     
 

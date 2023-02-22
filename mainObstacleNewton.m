@@ -5,11 +5,11 @@ clear; clc; close all;
 %%%%%%%%%%%%%         u = u_final on ∂Ω              %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 global k
-n     =  30;
+n     =  8;
 h     = 1/n;
 sigma =  100;
 eps   =  -1;
-k     =  2;
+k     =  4;
 
 
 f    =  @(x,y,t) x.*0;
@@ -23,7 +23,7 @@ invMass = diag(diag(Mass).^-1);  %%=M^-1 where M is diago,al
 b = SourceBCSystem(n,sigma,eps,k,g,f,0.0);
 g_projected = diag(invMass).*b;
 
-plot_sol(n,k,0, g_projected, g, u_final);
+plot_sol(n,k, g_projected, g, u_final);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,7 +58,7 @@ while (res > 1e-8)
     U = Uold + U;
     
     
-    plot_sol(n,k,0., U, g, u_final);
+    plot_sol(n,k, U, g, u_final);
     
     
     res = h*sqrt(sum((U-Uold).^2));
@@ -70,7 +70,8 @@ fprintf('\n')
 
 compute_error(U,@(x,y) final_sol(x,y),n,k)
 
-
+%Lap = compute_Lap(A,Mass,U,b,f,n,k);
+%plot_det(n,k, U, Lap);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

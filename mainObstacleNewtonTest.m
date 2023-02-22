@@ -6,11 +6,11 @@ clear; clc; close all;
 % This main is used for tests of convergence for u, lap(u) and det(u) 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 global k
-n     =  10;
+n     =  8;
 h     = 1/n;
 sigma =  100;
-eps   =  -1;
-k     =  3;
+eps   =  1;
+k     =  4;
 
 
 %f    =  @(x,y,t) x.*0;
@@ -52,7 +52,6 @@ while (res > 1e-8)
     %dG = Da*invMass*A + Db;  %%% sans changement de varibale
     dG = Da*A + Db;
     
-  
     Uold = U;
     
     %U = -gmres(dG,G,[], 1e-12, 1000);
@@ -62,6 +61,10 @@ while (res > 1e-8)
     
     %plot_sol(n,k,0., U, g, u_final);
     
+    %%% plot determinant %%%%%%%%%
+    %Lap = compute_Lap(A,Mass,U,b,f,n,k);
+    %plot_det(n,k, U, Lap, @(x,y,t) determiant_exct(x,y));
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     res = h*sqrt(sum((U-Uold).^2));
     t = t + 1;
@@ -70,12 +73,13 @@ while (res > 1e-8)
 end
 fprintf('\n')
 
-compute_error(U,@(x,y) final_sol(x,y),n,k)
+compute_error(U,@(x,y) final_sol(x,y),n,k) %%error w.r.t u
 
-Lap = compute_Lap(A,Mass,U,b,f,0.,n,k);
-%plot_sol(n,k,0., Lap, g, @(x,y,t) determiant_exct(x,y));
 
-plot_det(n,k, U, Lap, @(x,y,t) determiant_exct(x,y));
+Lap = compute_Lap(A,Mass,U,b,f,n,k);
+compute_error(Lap,@(x,y) -source(x,y),n,k) %%error w.r.t lap(u)
+
+plot_det(n,k, U, Lap, @(x,y,t) determiant_exct(x,y)); %%error w.r.t det(u)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

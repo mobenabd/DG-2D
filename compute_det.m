@@ -34,6 +34,6 @@ lapu2 =  compute_sol(x,y,Lap,n,k)^2; %%(\Delta u)^2
 
 val = 0.25*(lapu2 - (uxx-uyy)^2 - 4*uxy^2);
 
-%val = uxx*uyy - uxy^2;
+%val = uxx*uyy - uxy^2; %%for testing without weak laplacian
 
 end

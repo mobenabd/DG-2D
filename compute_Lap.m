@@ -1,9 +1,9 @@
-function Lap = compute_Lap(A,Mass,U,b,f,t,n,k)
+function Lap = compute_Lap(A,Mass,U,b,f,n,k)
 %%%%% Compute weak Laplacian %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Nloc = (k+1)^2;                %local dimension matrix
 gdim = Nloc*n^2;               %global dimension matrix 
-f_source = @(x,y) f(x,y,t);    %source term function
+f_source = @(x,y) f(x,y,0.);    %source term function
 
 %%% volume contribution of source term
 F = zeros(gdim,1);
