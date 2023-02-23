@@ -9,19 +9,27 @@ function plot_sol(n,k, U, g, uexct)
 dx= 0.01;
 
 
-if  ~exist('uexct','var')
-    uexct = g;
-end
+% if  ~exist('uexct','var')
+%     uexct = g;
+% end
 
 
 x = 0:dx:1;
 M = zeros(length(x),1);
 Mexct = zeros(length(x),1);
 for i = 1:length(x)
-    M(i)     = compute_sol(x(i),0.5,U,n,k);
-    Mexct(i) = uexct(x(i),0.5,0);
+    M(i)     = compute_sol(x(i),0.25,U,n,k);
 end
     
+if  ~exist('uexct','var')
+    for i = 1:length(x)
+        Mexct(i) = g(x(i),0.25,0);
+    end
+else
+    for i = 1:length(x)
+        Mexct(i) = uexct(x(i),0.25,0);
+    end
+end
 
 f = figure (1);
 %f.Position
