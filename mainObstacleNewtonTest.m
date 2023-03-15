@@ -79,7 +79,7 @@ compute_error(U,@(x,y) final_sol(x,y),n,k) %%error w.r.t u
 Lap = compute_Lap(A,Mass,U,b,f,n,k);
 compute_error(Lap,@(x,y) -source(x,y),n,k) %%error w.r.t lap(u)
 
-plot_det(n,k, U, Lap, @(x,y,t) determiant_exct(x,y)); %%error w.r.t det(u)
+plot_det(n,k, U, @(x,y,t) determiant_exct(x,y)); %%error w.r.t det(u)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,4 +1,4 @@
-function val = compute_det(n,k,Lap,U,x,y)
+function val = compute_det(x,y,n,k,U, eig_m)
 %%%% evaluate det(u) on point (x,y) %%%%%%%%%%%%%%%%
 % Solution U ddls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Lap: weak laplacian ddls %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,11 +29,16 @@ for i=1:Nloc
 end
 
 
-lapu2 =  compute_sol(x,y,Lap,n,k)^2; %%(\Delta u)^2
 
+if exist('eig_m', 'var')
+    if (eig_m==1)
+        %val = 0.5*(compute_sol(x,y,Lap,n,k) + sqrt( (uxx-uyy)^2 + 4*uxy^2 )); %largest eigenvalue
+        val = 0.5*(uxx + uyy + sqrt( (uxx-uyy)^2 + 4*uxy^2 )); %largest eigenvalue
+        return;
+    end
+end
 
-val = 0.25*(lapu2 - (uxx-uyy)^2 - 4*uxy^2);
+val = uxx*uyy - uxy^2; %%for testing without weak laplacian
 
-%val = uxx*uyy - uxy^2; %%for testing without weak laplacian
 
 end

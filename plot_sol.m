@@ -21,11 +21,11 @@ for i = 1:length(x)
     M(i)     = compute_sol(x(i),0.25,U,n,k);
 end
     
-if  ~exist('uexct','var')
+if  (~exist('uexct','var') && exist('g','var'))
     for i = 1:length(x)
         Mexct(i) = g(x(i),0.25,0);
     end
-else
+elseif ( exist('uexct','var'))
     for i = 1:length(x)
         Mexct(i) = uexct(x(i),0.25,0);
     end
@@ -39,18 +39,18 @@ plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth
 hold on
 if exist('uexct','var')
     plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exacte')
-else
+elseif (~exist('uexct','var') &&  exist('g','var'))
    plot(x, Mexct,'LineWidth',1 ,'DisplayName', 'Obstacle')
 end
 legend('-DynamicLegend')
 %axis([0 1 -1.5 1.5])
-title('at y=0.5')
+title('y=0.25')
 hold off
     
 
 %dx= 1/n;
 %dx= dx/2;
-dx = dx*2;
+dx = 4*dx;
 x = 0:dx:1;
 y = 0:dx:1;
 [X,Y] = meshgrid(x,y);
@@ -63,7 +63,7 @@ end
 
         
 subplot(121)
-surf(X,Y,M,'EdgeColor','none')
+mesh(X,Y,M)%,'EdgeColor','none')
 colorbar
 title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
 
