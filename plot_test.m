@@ -1,4 +1,4 @@
-function U0 = plot_sol(n,k, U, g, uexct)
+function plot_test(n,k, U, g, uexct)
 %%% Plot solution of the obstacle problem %%%%%%%%%%%%%
 %%% plt=1 for 1D plot on y=0.5 and exact solution exists
 %%% plt=2 for 2D plot
@@ -31,12 +31,12 @@ elseif ( exist('uexct','var'))
     end
 end
 
-U0 = M;
+
 
 f = figure (1);
 %f.Position
-f.Position(3:4) = [1100 600];
-subplot(122)
+%f.Position(3:4) = [1100 600];
+%subplot(122)
 if exist('g','var')
     plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
 else
@@ -46,14 +46,14 @@ hold on
 if exist('uexct','var')
     plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exacte')
 elseif (~exist('uexct','var') &&  exist('g','var'))
-   plot(x, Mexct,'LineWidth',1 ,'DisplayName', 'Obstacle')
+   plot(x, Mexct,'LineWidth',1 ,'DisplayName', 'Sol exacte du P-O')
 end
 legend('-DynamicLegend')
 %axis([0 1 -1.5 1.5])
 title('y=x')
 hold off
     
-
+return
 %dx= 1/n;
 %dx= dx/2;
 dx = 4*dx;
@@ -68,10 +68,10 @@ for i = 1:length(x)
 end
 
         
-subplot(121)
-mesh(X,Y,M)%,'EdgeColor','none')
-colorbar
-title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
+% subplot(121)
+% mesh(X,Y,M)%,'EdgeColor','none')
+% colorbar
+% title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
 
  %pause(5);
 end

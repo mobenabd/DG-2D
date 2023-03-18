@@ -1,4 +1,4 @@
-function Ak = ACM_ak(k,c,U,LAP, f_projected,g_projected,num)
+function Ak = ACM_ak(k,c,U,LAP, f_projected,g_projected,num, DET, Eig_m)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %return local a^k(x) on quadrature points  for ACM method
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

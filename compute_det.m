@@ -30,13 +30,12 @@ end
 
 
 
-if exist('eig_m', 'var')
-    if (eig_m==1)
-        %val = 0.5*(compute_sol(x,y,Lap,n,k) + sqrt( (uxx-uyy)^2 + 4*uxy^2 )); %largest eigenvalue
-        val = 0.5*(uxx + uyy + sqrt( (uxx-uyy)^2 + 4*uxy^2 )); %largest eigenvalue
-        return;
-    end
+if (eig_m==1)
+    %val = 0.5*(compute_sol(x,y,Lap,n,k) + sqrt( (uxx-uyy)^2 + 4*uxy^2 )); %largest eigenvalue
+    val = 0.5*(uxx + uyy + sqrt( (uxx-uyy)^2 + 4*uxy^2 )); %largest eigenvalue
+    return;
 end
+
 
 val = uxx*uyy - uxy^2; %%for testing without weak laplacian
 

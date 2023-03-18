@@ -5,6 +5,11 @@ function DET = computeDet_ddl(n,k,U, eig_m)
 %%%%%% instead of the determinant %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+if ~exist('eig_m', 'var')
+   eig_m = 0; 
+end
+
+
 Nloc = (k+1)^2;
 gdim = n^2*Nloc;
 DET = zeros(gdim,1);

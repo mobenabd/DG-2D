@@ -1,4 +1,4 @@
-function Mass = ACM_GlobalMass(n,k,c,U,LAP,g_projected, f_projected)
+function Mass = ACM_GlobalMass(Eig_m, DET, n,k,c,U,LAP,g_projected, f_projected)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %get global mass matrix M^k for ACM method 
 
@@ -15,7 +15,7 @@ end
 %% Assemble volume contrubution
 kk = 0;
 for ielm=1:n^2
-    Masselem = ACM_localMassMatrix_vol(n,k,ielm,c,U,LAP,f_projected,g_projected);
+    Masselem = ACM_localMassMatrix_vol(n,k,ielm,c,U,LAP,f_projected,g_projected, DET, Eig_m);
     for i=1:Nloc
         ie = i + kk;
         for j=1:Nloc

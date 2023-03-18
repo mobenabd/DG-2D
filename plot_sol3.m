@@ -1,6 +1,6 @@
-function U0 = plot_sol(n,k, U, g, uexct)
+function plot_sol3(n,k, U, U0)
 %%% Plot solution of the obstacle problem %%%%%%%%%%%%%
-%%% plt=1 for 1D plot on y=0.5 and exact solution exists
+%%% plt=1 for 1D plot DDLs
 %%% plt=2 for 2D plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -16,38 +16,22 @@ dx= 0.01;
 
 x = 0:dx:1;
 M = zeros(length(x),1);
-Mexct = zeros(length(x),1);
+Mexct = U0;
 for i = 1:length(x)
     M(i)     = compute_sol(x(i),x(i),U,n,k);
 end
     
-if  (~exist('uexct','var') && exist('g','var'))
-    for i = 1:length(x)
-        Mexct(i) = g(x(i),x(i),0);
-    end
-elseif ( exist('uexct','var'))
-    for i = 1:length(x)
-        Mexct(i) = uexct(x(i),x(i),0);
-    end
-end
 
-U0 = M;
 
 f = figure (1);
 %f.Position
 f.Position(3:4) = [1100 600];
 subplot(122)
-if exist('g','var')
-    plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
-else
-    plot(x, M ,'DisplayName', 'Obstacle (projected)', 'Marker','.','MarkerSize', 10,'LineWidth',1, 'Color', "#D95319")
-end
+plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
 hold on
-if exist('uexct','var')
-    plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exacte')
-elseif (~exist('uexct','var') &&  exist('g','var'))
-   plot(x, Mexct,'LineWidth',1 ,'DisplayName', 'Obstacle')
-end
+
+plot(x, Mexct,'DisplayName', 'Obstacle (projected)', 'Marker','.','MarkerSize', 10,'LineWidth',1)
+
 legend('-DynamicLegend')
 %axis([0 1 -1.5 1.5])
 title('y=x')

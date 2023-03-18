@@ -1,4 +1,4 @@
-function b = ACM_localRHS_vol(n,k,num,c,U,LAP,f_projected,g_projected, DET, Eig_m)
+function b = MA_localRHS_vol(n,k,num,c,U,LAP,f_projected,g_projected, DET, Eig_m)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% compute local mass matrix for ACM method %%%%%%%%%%%%%%%%%%%
 % n  : Global discretisation 
@@ -9,7 +9,7 @@ Nloc = (k+1)^2;         %local dimension
 b    = zeros(Nloc,1);
 
 
-Bk = ACM_bk(k,c,U,LAP, f_projected,g_projected,num, DET, Eig_m);
+Bk = MA_bk(k,c,U,LAP, f_projected,g_projected,num, DET, Eig_m);
 %ak  =  func_mapping(ak_function,n,num);
 [~,~, detJac] = jacobian_elem(1,n);    % (uniforme grid)
 
