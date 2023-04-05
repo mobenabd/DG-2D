@@ -31,10 +31,10 @@ uexct_loc  =  func_mapping(uexct,n,num);
 for i=1:Nloc
     [phi, dphix, dphiy] = basis(i,n,k);
     if (verHor ==1 )   %vertical edge on x=+/-1, normal = [+/-1 0];
-        b(i) = detJac11* quadrature(@(y) (eps*normal*dphix(ss,y)  + sigma/(h^beta0)*phi(ss,y)).*uexct_loc(ss,y),1,5);
+        b(i) = detJac11* quadrature(@(y) (eps*normal*dphix(ss,y)  + 2*sigma/(h^beta0)*phi(ss,y)).*uexct_loc(ss,y),1,5);
         
     elseif (verHor == 0)  %horizontal edge on y=+/-1, normal = [0 +/-1];
-        b(i) = detJac11* quadrature(@(x) (eps*normal*dphiy(x,ss) + sigma/(h^beta0)*phi(x,ss)).*uexct_loc(x,ss),1,5);
+        b(i) = detJac11* quadrature(@(x) (eps*normal*dphiy(x,ss) + 2*sigma/(h^beta0)*phi(x,ss)).*uexct_loc(x,ss),1,5);
     end
 end
 

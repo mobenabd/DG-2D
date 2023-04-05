@@ -6,12 +6,12 @@ clear; clc; close all;
 % This main is used for tests without exact solution
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 global k
-n     =  10;
+n     =  8;
 h     = 1/n;
 sigma =  50;
 eps   =  -1;
 k    =  3;
-c    = 10^3;
+c    = 1e3;
 gdim = n^2*(k+1)^2;
 
 
@@ -33,9 +33,9 @@ Uold = zeros(gdim,1);
     %%%%%%%%%%%%%%%%%%%%%%%%%
 
     %%%% without noise %%%%%%%
-    b = SourceBCSystem(n,sigma,eps,k, g,f,0.0);
-    g_projected = Mass\b;
-
+    %b = SourceBCSystem(n,sigma,eps,k, g,f,0.0);
+    %g_projected = Mass\b;
+    g_projected = computeDirectProjection(n,k,g);
     %%%%%%%%%%%%%%%%%%
 
 U = g_projected;
@@ -57,12 +57,13 @@ f_projected = zeros(gdim,1) ;
 
 res = 1;
 t=1;
-while (res > 1e-6)
+while (res > 1e-6 )
     Lap = computeLap2_ddl(n,k,U);   %%compute determinant
     DET = computeDet_ddl(n,k,U);    %%compute determinant
     Eig_m = computeDet_ddl(n,k,U,1);  %%compute largest eigenvalue
     Mk =  ACM_GlobalMass(Eig_m, DET, n,k,c,U,Lap,g_projected, f_projected);
     RHS = ACM_RHS(Eig_m, DET, n,k,c,U,Lap,sigma,eps,g,g_projected, f_projected);
+    
     
     Uold = U;
     U = (A+Mk)\RHS;
@@ -70,7 +71,8 @@ while (res > 1e-6)
     plot_sol(n,k, U, g);
     %plot_sol3(n,k, U, U0)
     
-    
+
+
     %%%%%% For Monge-Ampere %%%%%%%%%
     %RHS_ma = MA_RHS(Eig_m, DET, n,k,c,U,Lap,sigma,eps,g,g_projected, f_projected);
     %U = A\RHS_ma;
@@ -80,10 +82,10 @@ while (res > 1e-6)
     
     
     
-    res = sqrt(sum((U-Uold).^2))/sqrt(sum(U).^2);
-    t = t + 1;
+    res = sqrt(sum((U-Uold).^2))/sqrt(sum(U.^2));
     fprintf('res=%f, counter=%i\n', res, t);
-  
+    t = t + 1;
+    
 end
 fprintf('\n')
 
@@ -96,10 +98,16 @@ function out = obstacle(tx,ty)
 out = sin(2*pi*tx)*sin(2*pi*ty);
 
 
+% x = 2*tx-1;
+% y = 2*ty-1;
+% out = -max([0.5*x, y-0.5, 2*x+y-1, -5*x+y-4, 2-10*x.^2 - 10*y.^2]);
 
-% if (out<0)
-%      out = 0;
-%  end
+%out = - (sin(pi*(x-y))./exp(2*(x.^2+y.^2)) + x.^2 + y.^2);
+
+
+
+
+%out = -max([0.5*x, y-0.5, 2*x+y-1, -5*x+y-4]);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

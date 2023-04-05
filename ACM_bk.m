@@ -12,8 +12,8 @@ for i=1:Nloc
         Bk(i) = c*g_projected(idx+i) - LAP(idx+i);
         %Bk(i) = c*g_projected(idx+i) ;
     else
-        Bk(i) = sqrt( LAP(idx+i)^2 + 2*( f_projected(idx+i)-DET(idx+i)) );
-        %Bk(i) =  f_projected(idx+i);
+        %Bk(i) = sqrt( LAP(idx+i)^2 + 2*( f_projected(idx+i)-DET(idx+i)) );
+        Bk(i) =  f_projected(idx+i);
     end
 end
 

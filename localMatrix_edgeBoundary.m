@@ -34,11 +34,11 @@ for i=1:Nloc
         if (verHor ==1 )   %vertical edge on x=+/-1, normal = [+/-1 0];
            M11(i,j) = -detJac11* quadrature(@(y) normal*dphjx(ss,y) .* phi(ss,y),1) ...
                        +detJac11*eps* quadrature(@(y) normal*dphix(ss,y) .* phj(ss,y),1) ...
-                       +detJac11*(sigma/h^beta0)*quadrature(@(y) phi(ss,y).*phj(ss,y),1);
+                       +detJac11*(2*sigma/h^beta0)*quadrature(@(y) phi(ss,y).*phj(ss,y),1);
         elseif (verHor == 0)  %horizontal edge on y=+/-1, normal = [0 +/-1];
            M11(i,j) = -detJac11*quadrature(@(x) normal*dphjy(x,ss) .* phi(x,ss),1) ...
                        +detJac11*eps*quadrature(@(x) normal*dphiy(x,ss) .* phj(x,ss),1) ...
-                       +detJac11*(sigma/h^beta0)*quadrature(@(x) phi(x,ss).*phj(x,ss),1);
+                       +detJac11*(2*sigma/h^beta0)*quadrature(@(x) phi(x,ss).*phj(x,ss),1);
         end
     end
 end
