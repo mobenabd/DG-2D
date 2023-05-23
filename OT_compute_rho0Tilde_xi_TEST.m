@@ -1,4 +1,4 @@
-function [PROJ, X0new] = OT_compute_rho0Tilde_xi(n,k, rho0_x, M, X0old)
+function [PROJ, X0new] = OT_compute_rho0Tilde_xi_TEST(n,k, rho0_x, M, X0old)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Compute rho_tilde_(xi) knowing rho_tilde(x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,12 +30,12 @@ for elem=1:n^2
         
         %[x,y] = OT_computeX_xi2(xi1,xi2, M, n,k);  % with relaxed Newton, M=lambda_x
         
-        %[x, y] = OT_Xxi2(xi1, xi2);  %%for lambda exact known
+        [x, y] = OT_Xxi2(xi1, xi2);  %%for lambda exact known
         
         
         %%%% Default option
-        x0 = X0old(ie,1); y0 = X0old(ie,2); 
-        [x, y] = OT_computeX_xi3(x0, y0, xi1, xi2, M, n, k);  % with Guass-Newton, M=lambda_x
+        %x0 = X0old(ie,1); y0 = X0old(ie,2); 
+        %[x, y] = OT_computeX_xi3(x0, y0, xi1, xi2, M, n, k);  % with Guass-Newton, M=lambda_x
        
          
         test = 0;
@@ -68,7 +68,7 @@ for elem=1:n^2
             fprintf('WARNING X(xi): yold=%f\n', yold);
         end
         
-        X0new(ie,1) = x;   X0new(ie,2) = y;
+         X0new(ie,1) = x;   X0new(ie,2) = y;
         
         PROJ(ie) = compute_sol(x,y,rho0_x,n,k);
 
@@ -77,5 +77,5 @@ for elem=1:n^2
 end
 
 %%% positive density
-PROJ(PROJ<0) = 0;
+%PROJ(PROJ<0) = 0;
 end

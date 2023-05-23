@@ -31,37 +31,37 @@ for elem=1:n^2
         xi1 = x - ux;
         xi2 = y - uy;
         
-        test = 0;
-        xiold = inf;
+        test = 0; xiold = inf;
         if (xi1 >1)
-            xiold = xi1;
-            test = 1;
-            xi1 = 1;
+            xiold = xi1; test = 1; xi1 = 1;
         elseif (xi1 <0)
-            xiold = xi1;
-            test = 1;
-            xi1 = 0;
+            xiold = xi1; test = 1; xi1 = 0;
         end
         if(test)
-            fprintf('Warning: xi1=%f\n', xiold);
+            fprintf('WARNING dlambda: x=%f, xi1=%f\n', x, xiold);
         end
         
-        test = 0;
-        xiold = inf;
+        test = 0; xiold = inf;
         if (xi2 >1)
-            xiold = xi2;
-            test = 1;
-            xi2 = 1;
+            xiold = xi2; test = 1; xi2 = 1;
         elseif (xi2 <0)
-            xiold = xi2;
-            test = 1;
+            xiold = xi2; test = 1;
             xi2 = 0;
         end
         if(test)
-            fprintf('Warning: xi2=%f\n', xiold);
+            fprintf('WARNING dlambda: y=%f xi2=%f\n', y, xiold);
         end
-        
-        PROJ(ie) = compute_sol(xi1, xi2, PHI, n, k);
+        PROJ(ie) = compute_sol(xi1, xi2, PHI, n, k);      
+
+%     if (xi1 >1 || xi1 <0 || xi2 >1 || xi2 <0)
+%         a = compute_sol(0, 0, PHI, n, k)/(-0.1);
+%         b = compute_sol(1, 1, PHI, n, k)/0.1;
+%         a = (a+b)/2;
+%         PROJ(ie) = a*0.1*(xi1 + xi2 - 1);
+%         
+%     else
+%         PROJ(ie) = compute_sol(xi1, xi2, PHI, n, k);
+%     end
         
     end
     kk = kk + Nloc;

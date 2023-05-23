@@ -24,6 +24,7 @@ end
 if  (~exist('uexct','var') && exist('g','var'))
     for i = 1:length(x)
         Mexct(i) = g(x(i),x(i),0);
+        %compute_sol(x(i),x(i),g,n,k);
     end
 elseif ( exist('uexct','var'))
     for i = 1:length(x)
@@ -61,9 +62,9 @@ x = 0:dx:1;
 y = 0:dx:1;
 [X,Y] = meshgrid(x,y);
 M = zeros(length(x),length(y));
-for i = 1:length(x)
-    for j=1:length(y)
-        M(i,j) = compute_sol(x(i),y(j),U,n,k);
+for i=1:length(y)
+    for j = 1:length(x)
+        M(i,j) =compute_sol(x(j),y(i),U,n,k);
     end
 end
 

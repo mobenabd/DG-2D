@@ -10,7 +10,7 @@ kk = 0;
 val = 0;
 for ielm=1:n^2
     for i=1:Nloc
-         ie = i + kk;
+        ie = i + kk;
         [phi, ~, ~] = basis(i,n,k);
         val =val + RHO(ie) * detJac * quadrature(phi, 2);
     end

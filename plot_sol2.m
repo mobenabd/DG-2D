@@ -29,18 +29,19 @@ for elem=1:n
 end
 
 [X,Y] = meshgrid(x,y);
-for i = 1:length(x)
-    for j=1:length(y)
-        M(i,j) = compute_sol(x(i),y(j),U,n,k);
+for i=1:length(y)
+    for j = 1:length(x)
+        M(i,j) =compute_sol(x(j),y(i),U,n,k);
     end
 end
 
 
         
 %subplot(121)
-f = figure(1);
+f = figure;
 f.Position(3:4) = [1100 600];
 surf(X,Y,M)%,'EdgeColor','none')
+%mesh(X,Y,M)
 colorbar
 title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
 

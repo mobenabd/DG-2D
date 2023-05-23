@@ -51,16 +51,17 @@ plot_sol(n,k, U, g);
 %f_projected = Mass\b;
 %plot_sol(n,k, f_projected);
 
-f_projected = zeros(gdim,1) ;
- 
+f_projected = zeros(gdim,1);
+Eig_m = NaN(gdim,1);
+DET = NaN(gdim,1);
 
 
 res = 1;
 t=1;
-while (res > 1e-6 )
+while (res > 1e-6)
     Lap = computeLap2_ddl(n,k,U);   %%compute determinant
     DET = computeDet_ddl(n,k,U);    %%compute determinant
-    Eig_m = computeDet_ddl(n,k,U,1);  %%compute largest eigenvalue
+    %Eig_m = computeDet_ddl(n,k,U,1);  %%compute largest eigenvalue
     Mk =  ACM_GlobalMass(Eig_m, DET, n,k,c,U,Lap,g_projected, f_projected);
     RHS = ACM_RHS(Eig_m, DET, n,k,c,U,Lap,sigma,eps,g,g_projected, f_projected);
     
@@ -95,19 +96,19 @@ fprintf('\n')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function out = obstacle(tx,ty)
-out = sin(2*pi*tx)*sin(2*pi*ty);
+%out = sin(2*pi*tx)*sin(2*pi*ty);
 
 
-% x = 2*tx-1;
-% y = 2*ty-1;
+%  x = 2*tx-1;
+%  y = 2*ty-1;
 % out = -max([0.5*x, y-0.5, 2*x+y-1, -5*x+y-4, 2-10*x.^2 - 10*y.^2]);
 
 %out = - (sin(pi*(x-y))./exp(2*(x.^2+y.^2)) + x.^2 + y.^2);
 
 
-
-
 %out = -max([0.5*x, y-0.5, 2*x+y-1, -5*x+y-4]);
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,19 +117,19 @@ out = sin(2*pi*tx)*sin(2*pi*ty);
 % 
 % out = -(0.98 - x.^2 - y.^2)^2;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% x = 4*tx-2;
-% y = 4*ty-2;
-% 
-% rxy = x.^2 + y.^2;
-% if (rxy <= 1 )
-%     out = sqrt(1 - rxy);
-% else
-%     out = -1;
-% end
-% 
-% if ((x==-2 ||  x==2 || y==-2 || y==2))
-%     out = final_sol(tx,ty);
-% end
+x = 4*tx-2;
+y = 4*ty-2;
+
+rxy = x.^2 + y.^2;
+if (rxy <= 1 )
+    out = sqrt(1 - rxy);
+else
+    out = -1;
+end
+
+if ((x==-2 ||  x==2 || y==-2 || y==2))
+    out = final_sol(tx,ty);
+end
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,6 +182,7 @@ function out = source(tx,ty)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 out = 0;
+
 end
 
 

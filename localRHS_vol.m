@@ -15,6 +15,6 @@ source  =  func_mapping(f,n,num);
 [~,~, detJac] = jacobian_elem(1,n);    % (uniforme grid)
 for i=1:Nloc
     [phi,~, ~] = basis(i,n,k);
-    b(i) = detJac * quadrature(@(x,y) source(x,y).*phi(x,y),2,5);
+    b(i) = detJac * quadrature(@(x,y) source(x,y).*phi(x,y),2,3);
 end
 end

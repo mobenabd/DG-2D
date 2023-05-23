@@ -18,4 +18,8 @@ end
 err2 = dx*sqrt(sum(sum((Mexct-M).^2)));
 fprintf('|e|_2 = %.10f\n',err2);
 
+
+errInf = max(abs(Mexct-M), [], 'all');
+fprintf('|e|_inf = %.10f\n',errInf);
+
 end

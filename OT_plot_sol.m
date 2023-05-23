@@ -1,7 +1,10 @@
-function OT_plot_sol(n,k,U,g)
+function OT_plot_sol(n,k,U,numFig)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+if ~exist('numFig', 'var')
+    numFig = 2;
+end 
 
 
 dx= 0.01;
@@ -9,30 +12,26 @@ dx= 0.01;
 
 
 
-f = figure (1);
-f.Position(3:4) = [1100 600];
+f = figure(numFig);
+f.Position(3:4) = [700 500];
 
 %dx = 4*dx;
 x = 0:dx:1;
 y = 0:dx:1;
 [X,Y] = meshgrid(x,y);
 M = zeros(length(x),length(y));
-if exist('g','var')
-    for i = 1:length(x)
-        for j=1:length(y)
-            M(i,j) = g(x(i),y(j));
-        end
-    end
-else
-    for i = 1:length(x)
-        for j=1:length(y)
-            M(i,j) =compute_sol(x(i),y(j),U,n,k);
-        end
+
+for i=1:length(y)
+    for j = 1:length(x)
+        M(i,j) =compute_sol(x(j),y(i),U,n,k);
     end
 end
 
-   
-mesh(X,Y,M)%,'EdgeColor','none')
+
+
+%surf(X,Y,M)%,'EdgeColor','none')
+mesh(X,Y,M)
+%contourf(X,Y,M,15,'EdgeColor','none')
 colorbar
 xlabel('x'); ylabel('y'); zlabel('u')
 
