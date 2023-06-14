@@ -1,4 +1,5 @@
 clear; clc; close all;
+addpath './src_DG/'
 %%%%%%%%%%%%%%%  Solve u_t-Δu = f in Ω = [0,1].^2 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%         u = u_0  in Ω at t=0      %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%         u = g on ∂Ω               %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,6 +9,9 @@ sigma =  100;
 eps   =  -1;
 global k
 k     =  1;
+global x0 xN hxy
+x0 = 0; xN = 1;
+hxy = (xN-x0)/n;
 dt = 0.001;
 
 %exact solution  + BC condition + initial condition
@@ -29,7 +33,7 @@ U = Mass\b;
 
 
 count=1;
-while (count<20)
+while (count<5)
     b = SourceBCSystem(n,sigma,eps,k,uexct,f,count*dt);
     U = (Mass + dt*A)\(Mass*U+dt*b);
     plot_solHeat(n,k,count*dt, U, uexct);
@@ -43,8 +47,8 @@ while (count<20)
     count = count + 1
 end
 t=(count-1)*dt;
-Lap = compute_Lap(A,Mass,U,b,f,t,n,k);
+
 
 compute_error(U,@(x,y) uexct(x,y,t),n,k)
-compute_error(Lap,@(x,y) -f(x,y,t) - pi/2.*sin(pi/2. *t).*sin(2*pi*x).*sin(2*pi*y),n,k)
+
 
