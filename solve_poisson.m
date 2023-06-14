@@ -11,7 +11,7 @@ g_t = @(x,y,t) g(x,y);
 
 
 %%% Solve system
-bc_t = 1;  %%=1 if Dirichlet b.c, Neumann otherwise
+bc_t = 0;  %%=1 if Dirichlet b.c, Neumann otherwise
 epsilon = 1e-6;
 
 

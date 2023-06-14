@@ -40,7 +40,7 @@ f = figure(3);
 f.Position(3:4) = [700 500];
 
 
-contourf(XX,YY,M,8,'EdgeColor','none')
+contourf(XX,YY,M,20,'EdgeColor','none')
 %colormap jet
 colorbar
 

@@ -38,8 +38,8 @@ end
 
         
 %subplot(121)
-f = figure;
-f.Position(3:4) = [1100 600];
+f = figure(4);
+f.Position(3:4) = [700 500];
 surf(X,Y,M)%,'EdgeColor','none')
 %mesh(X,Y,M)
 colorbar

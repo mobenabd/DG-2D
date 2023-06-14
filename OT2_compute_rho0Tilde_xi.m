@@ -30,8 +30,13 @@ for elem=1:n^2
         x = xi1 + ux;
         y = xi2 + uy;
          
-        
-        PROJ(ie) = rho_1(x,y); %*det_xi vectorized
+        val = rho_1(x,y);
+        PROJ(ie) = val;
+        %if (val>0 && det_xi(ie)>0)
+        %    PROJ(ie) = val*det_xi(ie);
+        %else
+        %    PROJ(ie) = 0;
+        %end
 
     end
     kk = kk + Nloc;

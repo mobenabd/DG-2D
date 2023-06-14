@@ -31,10 +31,10 @@ g = @(x,y,t) gxy(x,y);
 beta =  @(x,y,t) gxy(x,y);  %%Dirichlet boundary condition
 
 %%%%% Initialization %%%%%%%%%%%%%%%%%%%%%
-neumm = 1;
-[A,Mass] = MatricesSystem(n,sigma,eps,k, neumm);
+bc_t = 1; %%=1 if Dirichlet b.c, Neumann otherwise
+[A,Mass] = MatricesSystem(n,sigma,eps,k, bc_t);
 
-if (neumm == 0)
+if (bc_t == 0)
     A = A + 1e-5*Mass;
 end
 
@@ -42,16 +42,17 @@ end
 %f_projected = zeros(gdim,1) ;
 
 
-%f_projected = 0.5*ones(gdim,1) ; 
-f_projected = 0.001*ones(gdim,1) ; 
 
+%f_projected = 0.001*ones(gdim,1) ; 
+
+f_projected = 0.1*ones(gdim,1) ; 
 
 res = 1;
 t=1;
 Eig_m = 0;
 while (res > tol)
     Mk =  ACM_GlobalMass(Eig_m, DET, n,k,c,U,Lap,g_projected, f_projected);
-    RHS = ACM_RHS(Eig_m, DET, n,k,c,U,Lap,sigma,eps,beta,g_projected, f_projected, neumm);
+    RHS = ACM_RHS(Eig_m, DET, n,k,c,U,Lap,sigma,eps,beta,g_projected, f_projected, bc_t);
     
     Uold = U;
     U = (A+Mk)\RHS;
@@ -71,7 +72,7 @@ while (res > tol)
     DET = computeDet_ddl(n,k,U);    %%compute determinant u^{k-1}
     
     
-    if (res < tol && Eig_m == 0 && ~isempty(find(DET<0, 1)) && neumm==1)
+    if (res < tol && Eig_m == 0 && ~isempty(find(DET<0, 1)) && bc_t==1)
         Eig_m = 1;
         c = 1;
         res = 1;
@@ -84,7 +85,7 @@ while (res > tol)
 end
 
 
-if (neumm == 0)
+if (bc_t == 0)
     vol = integrate(U,n);
     U = U-vol;
 end

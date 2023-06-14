@@ -12,8 +12,8 @@ n_k4 = [2^4 2^5 2^6 2^7 2^8];
 
 
 %%% avec \delta U = \nabla_x\delta\lambda  | -> ordre 2 non vérifié !
-%err2_k4_2   = [0.219822 0.079486 0.032545 0.014605 0.006910];
-%err2_k4_inf = [2.097403 0.779593 0.321345 0.144072 0.067949];
+% err2_k4_2   = [0.219822 0.079486 0.032545 0.014605 0.006910];
+% err2_k4_inf = [2.097403 0.779593 0.321345 0.144072 0.067949];
 
 
 %%% avec $\delta U = \nabla_\xi\delta\Phi$ | -> ordre 2 vérifié !
@@ -32,9 +32,9 @@ loglog(1./n_k4,err2_k4_2,'marker',all_marks{1}, 'LineStyle', '-.', 'LineWidth',1
 hold on
 loglog(1./n_k4,err2_k4_inf,'marker',all_marks{2},'LineStyle', '-','LineWidth',1)
 grid on
-text(0.55*1/n_k4(end),err2_k4_2(end) ,['$\mathcal{O}(h^{' num2str(coeff_k4_2(1),'%.2f') '})$'], ...
+text(0.55*1/n_k4(end),err2_k4_2(end) ,['$\mathcal{O}(\sigma_0^{' num2str(coeff_k4_2(1),'%.2f') '})$'], ...
         'interpreter','latex', 'fontsize', 12);
-text(0.55*1/n_k4(end),err2_k4_inf(end) ,['$\mathcal{O}(h^{' num2str(coeff_k4_inf(1),'%.2f') '})$'], ...
+text(0.55*1/n_k4(end),err2_k4_inf(end) ,['$\mathcal{O}(\sigma_0^{' num2str(coeff_k4_inf(1),'%.2f') '})$'], ...
         'interpreter','latex', 'fontsize', 12);
 xlabel('$\sigma_0$', 'interpreter', 'latex', 'fontsize', 12)
 ylabel('error-norm', 'interpreter', 'latex', 'fontsize', 12)
@@ -44,5 +44,5 @@ legend('$|| \tilde{\rho}_0^{(1)} - \tilde{\rho}_0^{(0)} - \delta\tilde{\rho}_0 |
 %title('taking $\delta U(\xi) = \nabla_\xi\delta\Phi(\xi)$', 'interpreter','latex', 'fontsize', 12)
 
 
-title('taking $\delta U(\xi) = \nabla_x\delta\lambda(x)$', 'interpreter','latex', 'fontsize', 12)
+title('taking $\delta U(\xi) = \nabla_\xi\delta\phi(\xi)$', 'interpreter','latex', 'fontsize', 12)
 

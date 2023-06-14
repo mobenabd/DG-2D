@@ -13,7 +13,7 @@ quotient = NaN(42,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 global k
-n     =  16;
+n     =  42;
 sigma =  10; eps   =  1;
 k    =  3; gdim = n^2*(k+1)^2;
 c    = 1e4;
@@ -29,8 +29,8 @@ rho_1 = @(x,y)  1/0.03141592 * exp(-100*((x-nu1)^2 + (y-nu1)^2));
 
 %%%%%%%%%%%%%%%%%%%%
 
-rho0_proj = computeDirectProjection(n,k,rho_0);
-rho1_proj = computeDirectProjection(n,k,rho_1);
+%rho0_proj = computeDirectProjection(n,k,rho_0);
+%rho1_proj = computeDirectProjection(n,k,rho_1);
 
 
 beta_old = @(x,y) 0.5*(x.^2 + y.^2);
@@ -41,7 +41,7 @@ beta_xi = computeDirectProjection(n,k,beta_old);
 Phi_xi0 = @(x,y) -0.6 * ( x.^3/3 - x.^2/2 + y.^3/3 - y.^2/2) ;
 Phi_xi_0 = computeDirectProjection(n,k,Phi_xi0) - 0.6/6;
 
-for kk=1:42
+for kk=25:42
 alpha = alpha_list(kk);
 
 Phi_xi = Phi_xi_0;
@@ -109,4 +109,6 @@ kk
 quotient(kk) = (Eold-E)/(alpha*dEold);
 end
 
+
+save('test_n42.mat')
 
