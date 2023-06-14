@@ -1,4 +1,5 @@
 clear; clc; close all;
+addpath './src_DG/' './optimal_transport/' './obstacle_problem'
 %%%%%%%%%%%%% Solve optimal transport problem %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% test with initializing \delta\Phi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

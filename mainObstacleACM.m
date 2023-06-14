@@ -1,4 +1,5 @@
 clear; clc; close all;
+addpath './src_DG/' './obstacle_problem'
 %%%%%%%%%%%%% Solve min(-Δu, u-g)=0 in Ω = [0,1].^2 %%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%  with ACM method      %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% using DG methods with Lgarange basis on quadrature nodes %%%%
