@@ -4,7 +4,8 @@ function [Jac,bE, det_Jac] = jacobian_elem(elem,n)
 % elem: element number 
 % n   : global discretisation 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-h = 1/n;
+[x0, ~, h] = getGlobal_x0N();
+
 
 %indice (i,j) de l'element elm
 if (mod(elem,n) ~= 0)
@@ -16,7 +17,7 @@ else % (j=n)
 end
 
 %coordonnée cartesienne des sommets
-x1 =  (j_elem-1)*h;  y1 =  (i_elem-1)*h;
+x1 =  x0 + (j_elem-1)*h; y1 =  x0 + (i_elem-1)*h;
 x2 = x1 + h;    y2 = y1;
 x4 = x1;        y4 = y1 + h;     
 

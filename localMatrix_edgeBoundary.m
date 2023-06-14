@@ -19,7 +19,7 @@ end
 
 
 
-h = 1/n;
+[~, ~, h] = getGlobal_x0N();
 Nloc = (k+1)^2;
 beta0 = 1;     %supper-penalization =1 (for now)
 M11 = zeros(Nloc,Nloc);

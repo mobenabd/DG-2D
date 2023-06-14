@@ -7,7 +7,7 @@ function b = localRHS_edgeBoundaryNeumann(verHor,ort,num,n,k,fN)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-h = 1/n;
+[~, ~, h] = getGlobal_x0N();
 Nloc = (k+1)^2;
 b = zeros(Nloc,1);
 

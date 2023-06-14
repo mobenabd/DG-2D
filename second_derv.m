@@ -4,7 +4,7 @@ function [dphxx, dphyy, dphxy] =  second_derv(index,n,k)
 %%% element [-1,1]*[-1,1] %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% using Lagrange shape functions on quadrature nodes %%%%%%%%%%%%%%%%%%%%
 % index          : shape function index
-% n              : Global dscretisation (h=1/n)
+% n              : Global dscretisation 
 % k              : polynomial degree Q_k
 % (dphxx, dphyy, dphxy) : = globla second deriviatives of phi(x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,6 +1,6 @@
 function b = SourceBCSystem(n,sigma,eps,k,uexct,f,t, bc_t, alpha_xy)
 % alpha_xy : diffusion function
-% bc_t     : type of bc: Dirichlet: bc_t=1 | Neumann: bc_t=0
+% bc_t     : type of bc: Dirichlet: bc_t=1 | Neumann: bc_t=0 (=1 by default)
 if ~exist('bc_t', 'var')
     bc_t = 1;
 end

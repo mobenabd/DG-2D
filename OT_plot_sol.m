@@ -6,8 +6,8 @@ if ~exist('numFig', 'var')
     numFig = 2;
 end 
 
-
-dx= 0.01;
+[x0, xN, ~] = getGlobal_x0N();
+dx= (xN-x0)*0.01;
 
 
 
@@ -16,8 +16,8 @@ f = figure(numFig);
 f.Position(3:4) = [700 500];
 
 %dx = 4*dx;
-x = 0:dx:1;
-y = 0:dx:1;
+x = x0:dx:xN;
+y = x0:dx:xN;
 [X,Y] = meshgrid(x,y);
 M = zeros(length(x),length(y));
 

@@ -7,10 +7,11 @@ clear; clc; close all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 global k
 n     =  10;
-h     = 1/n;
 sigma =  100;
 eps   =  -1;
 k     =  4;
+global x0 xN hxy
+x0=0; xN=1; hxy=(xN-x0)/n; h = hxy;
 
 
 f    =  @(x,y,t) x.*0  ;

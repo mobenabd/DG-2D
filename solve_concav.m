@@ -45,7 +45,7 @@ end
 
 %f_projected = 0.001*ones(gdim,1) ; 
 
-f_projected = 0.1*ones(gdim,1) ; 
+f_projected = 0.05*ones(gdim,1) ; 
 
 res = 1;
 t=1;

@@ -3,9 +3,11 @@ function compute_error(U,u_exct,n,k)
 % Compute L2 error with respect to the exact solution %%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-dx= 0.01;
-x = 0:dx:1;
-y = 0:dx:1;
+[x0, xN, ~] = getGlobal_x0N();
+dx= (xN-x0)*0.01;
+
+x = x0:dx:xN;
+y = x0:dx:xN;
 M = zeros(length(x),length(y));
 Mexct = zeros(length(x),length(y));
 for i = 1:length(x)

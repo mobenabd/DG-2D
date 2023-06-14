@@ -4,17 +4,18 @@ function plot_sol3(n,k, U, U0)
 %%% plt=2 for 2D plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%dx = 1/n;
+
 
 dx= 0.01;
 
+[x0, xN, ~] = getGlobal_x0N();
 
 % if  ~exist('uexct','var')
 %     uexct = g;
 % end
 
 
-x = 0:dx:1;
+x = x0:dx:xN;
 M = zeros(length(x),1);
 Mexct = U0;
 for i = 1:length(x)
@@ -38,11 +39,11 @@ title('y=x')
 hold off
     
 
-%dx= 1/n;
+
 %dx= dx/2;
 dx = 4*dx;
-x = 0:dx:1;
-y = 0:dx:1;
+x = x0:dx:xN;
+y = x0:dx:xN;
 [X,Y] = meshgrid(x,y);
 M = zeros(length(x),length(y));
 for i=1:length(y)

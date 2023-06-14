@@ -4,9 +4,10 @@ function U0 = plot_sol(n,k, U, g, uexct)
 %%% plt=2 for 2D plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%dx = 1/n;
 
-dx= 0.01;
+
+[x0, xN, ~] = getGlobal_x0N();
+dx= (xN-x0)*0.01;
 
 
 % if  ~exist('uexct','var')
@@ -14,7 +15,7 @@ dx= 0.01;
 % end
 
 
-x = 0:dx:1;
+x = x0:dx:xN;
 M = zeros(length(x),1);
 Mexct = zeros(length(x),1);
 for i = 1:length(x)
@@ -55,11 +56,9 @@ title('y=x')
 hold off
     
 
-%dx= 1/n;
-%dx= dx/2;
-dx = 4*dx;
-x = 0:dx:1;
-y = 0:dx:1;
+
+x = x0:dx:xN;
+y = x0:dx:xN;
 [X,Y] = meshgrid(x,y);
 M = zeros(length(x),length(y));
 for i=1:length(y)

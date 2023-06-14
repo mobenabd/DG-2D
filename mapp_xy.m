@@ -5,8 +5,11 @@ function [x, y] = mapp_xy(xi, nu, elem, n)
 [Jac,b, ~] = jacobian_elem(elem,n);   
 
 
-x = Jac(1,1)*xi + Jac(1,2)*nu + b(1);
-y = Jac(2,1)*xi + Jac(2,2)*nu + b(2);
+% x = Jac(1,1)*xi + Jac(1,2)*nu + b(1);
+% y = Jac(2,1)*xi + Jac(2,2)*nu + b(2);
 
+%%% cartesian mesh -> Jac(i,j) = 0 for i!=j
+x = Jac(1,1)*xi + b(1);
+y = Jac(2,2)*nu + b(2);
 
 end

@@ -4,15 +4,8 @@ function [uxx, uyy, uxy] = compute_secondDerv(n,k,U,x,y)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Nloc = (k+1)^2;
-h = 1/n;
-j = floor(x/h)+1; i = floor(y/h)+1;
-if (x==1)
-    j = j-1;
-end
-if (y==1)
-    i = i-1;
-end
-E = (i-1)*n+j;
+
+E = get_elemPos(x,y,n);
 
 [xi,nu] = inverse_mapp(x,y,E,n);
 

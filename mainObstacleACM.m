@@ -7,10 +7,11 @@ clear; clc; close all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 global k
 n     =  8;
-h     = 1/n;
 sigma =  50;
 eps   =  -1;
 k    =  3;
+global x0 xN hxy
+x0=0; xN=1; hxy=(xN-x0)/n;
 c    = 1e3;
 gdim = n^2*(k+1)^2;
 

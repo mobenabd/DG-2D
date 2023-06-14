@@ -1,11 +1,11 @@
 function OT_plot_displ(n,k,U,Phi_xi)
 
 %%%%%%%%%% Plot contours %%%%%%%%%%
+[x0, xN, ~] = getGlobal_x0N();
 
+dx= (xN-x0)*0.01;
 
-dx= 0.01;
-
-x = 0:dx:1; y = 0:dx:1;
+x = x0:dx:xN; y = x0:dx:xN;
 [XX,YY] = meshgrid(x,y);
 M = zeros(length(x),length(y));
 
@@ -18,7 +18,7 @@ end
 %%%%%%%%%% Plot vector gradient %%%%%%%%%%
 
 len = 40;
-x = 0:1/len:1-1/len; y = 0:1/len:1-1/len;
+x = x0:(xN-x0)/len:xN-(xN-x0)/len; y = x0:(xN-x0)/len:xN-(xN-x0)/len;
 
 
 Ux = NaN(len^2,1); Uy = NaN(len^2,1);
@@ -48,7 +48,7 @@ hold on
 
 %quiver(X,Y,Ux,Uy,0, 'Color','k')
 quiver(X,Y,Ux,Uy, 'Color','k')
-axis([0 1 0 1])
+axis([x0 xN x0 xN])
 xlabel('x'); ylabel('y'); zlabel('u')
 hold off
 

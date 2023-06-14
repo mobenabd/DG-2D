@@ -6,7 +6,8 @@ clear; clc; close all;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 global k
 n     =  8;
-h     = 1/n;
+global x0 xN hxy
+x0=0; xN=1; hxy=(xN-x0)/n; h = hxy;
 sigma =  100;
 eps   =  -1;
 k     =  4;
