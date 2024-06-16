@@ -7,7 +7,9 @@ function compute_error(U,u_exct,n,k)
 dx= (xN-x0)*0.01;
 
 x = x0:dx:xN;
-y = x0:dx:xN;
+y = x;
+
+
 M = zeros(length(x),length(y));
 Mexct = zeros(length(x),length(y));
 for i = 1:length(x)
@@ -22,6 +24,7 @@ fprintf('|e|_2 = %.10f\n',err2);
 
 
 errInf = max(abs(Mexct-M), [], 'all');
-fprintf('|e|_inf = %.10f\n',errInf);
+
+fprintf('|e|_inf = %.10f\n', errInf);
 
 end

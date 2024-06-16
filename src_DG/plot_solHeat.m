@@ -28,7 +28,7 @@ if  exist('uexct','var')
     plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
     hold on
     if exist('uexct','var')
-        plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exacte')
+        plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exact')
     else
         plot(x, Mexct,'LineWidth',1 ,'DisplayName', 'Obstacle')
     end

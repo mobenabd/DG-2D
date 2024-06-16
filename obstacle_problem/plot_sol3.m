@@ -1,49 +1,15 @@
-function plot_sol3(n,k, U, U0)
+function plot_sol3(n,k, U)
 %%% Plot solution of the obstacle problem %%%%%%%%%%%%%
-%%% plt=1 for 1D plot DDLs
-%%% plt=2 for 2D plot
+%% for 2D plot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-dx= 0.01;
-
 [x0, xN, ~] = getGlobal_x0N();
-
-% if  ~exist('uexct','var')
-%     uexct = g;
-% end
-
-
-x = x0:dx:xN;
-M = zeros(length(x),1);
-Mexct = U0;
-for i = 1:length(x)
-    M(i)     = compute_sol(x(i),x(i),U,n,k);
-end
-    
-
-
-f = figure (1);
-%f.Position
-f.Position(3:4) = [1100 600];
-subplot(122)
-plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
-hold on
-
-plot(x, Mexct,'DisplayName', 'Obstacle (projected)', 'Marker','.','MarkerSize', 10,'LineWidth',1)
-
-legend('-DynamicLegend')
-%axis([0 1 -1.5 1.5])
-title('y=x')
-hold off
-    
-
-
+%dx= 0.01;
 %dx= dx/2;
-dx = 4*dx;
-x = x0:dx:xN;
-y = x0:dx:xN;
+%dx = 4*dx;
+
+dx = (xN-x0)*0.02;
+x = x0:dx:xN; y = x0:dx:xN;
 [X,Y] = meshgrid(x,y);
 M = zeros(length(x),length(y));
 for i=1:length(y)
@@ -52,11 +18,22 @@ for i=1:length(y)
     end
 end
 
-        
-subplot(121)
-mesh(X,Y,M)%,'EdgeColor','none')
-colorbar
-title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
+f = figure(3);
+f.Position(3:4) = [700 500]; 
+%subplot(122)
+%surf(X,Y,M)%,'FaceAlpha','0.')%'FaceLighting','gouraud','EdgeColor','black')
+surf(X,Y,M, 'EdgeColor','none', 'FaceColor','interp', 'FaceLighting','gouraud')
+view(2)
+colormap hsv
+ colorbar
+h=colorbar;
+t=get(h,'Limits');
+T=linspace(t(1),t(2),5);
+T = [T 0];
+T = sort(T);
+set(h,'Ticks',T);
+TL=arrayfun(@(x) sprintf('%.2f',x),T,'un',0);
+set(h,'TickLabels',TL);
 
- %pause(5);
+xlabel('x'); ylabel('y'); 
 end

@@ -1,10 +1,37 @@
-# Obstacle-Problem-DG-2D
+## About
+Implementation of Interior Penalaty Discontinuous Glerkin methods (IP-DG) for diffusion problems using arbitrary high order Lagrange basis. 
 
-Arbitrary high order DG solver, Lagrange basis.
+MATLAB R2019 at least is required.
 
-Solve 2D linearized obstacle problem.
+## Quick start
+Clone the repository
+```[bash]
+git clone 
+cd 
+```
 
-Solve 2D obstacle problem with Newton semismooth method.
+## File structure
 
-Solve 2D elliptic/parabolic equation with backward Euler scheme in time.
+```
+DG-2D
+|   LICENSE
+│   README.md
+|   mainPoisson.m                  (solve 2D elliptic equations)
+|   mainHeat.m                     (solve 2D parabolic equations with backward Euler scheme in time)
+|   mainObstacle.m                 (solve 2D linearized obstacle problem)
+|   mainConvexification.m          (solve convexification problems)
+|   mainOptimalTransport.m         (Solve 2D L2-MKP problems)
+|
+└───obstacle_problem               (obstacle problem fixed point algorithm related files)
+|   |   ...                     
+|
+└───optimal_transport              (optimal transport related files)
+|   |   ...  
+|
+└───src_DG                         (IP-DG solver core functions)
+|   |   ...
+|
+└───test                           (various test mains)
+|   |   ...
+```
 

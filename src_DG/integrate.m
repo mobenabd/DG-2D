@@ -1,6 +1,6 @@
 function val = integrate(RHO,n)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Integrate a function defined on quadrature points over the domain [0,1]^2
+%%% Integrate a function defined on quadrature points over the domain [x0,xN]^2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 k = getGlobal_k();
 Nloc = (k+1)^2;                %local dimension matrix

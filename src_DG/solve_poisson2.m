@@ -1,5 +1,6 @@
-function [U, Ldecomp, Udecomp, Mass] = solve_poisson(f, g, n, sigma, eps, alpha_xy)
+function U = solve_poisson2(f, g, n, sigma, eps, Ldecomp, Udecomp, Mass)
 %%%%%%%%%%%%%%%  Solve -Δu = f in Ω = [0,1].^2 %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%  the Laplacian matrix is A = Ldecomp * Udecomp
 %%%%%%%%%%%%%%%          u = g on ∂Ω               %%%%%%%%%%%%%%%%%%%%%
 %  !! define k as global varibale before calling this function
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -16,34 +17,25 @@ epsilon = 1e-6;
 
 
 if ~exist('alpha_xy', 'var')
-    [A, Mass] = MatricesSystem(n,sigma,eps,k, bc_t);
     b = SourceBCSystem(n,sigma,eps,k,g_t,f_t,1., bc_t);
 else
-    [A, Mass] = MatricesSystem(n,sigma,eps,k, bc_t, alpha_xy);
     b = SourceBCSystem(n,sigma,eps,k,g_t,f_t,1., bc_t, alpha_xy);
 end
 
-
-
-if (bc_t == 0)
-     K = A+epsilon*Mass;
-     %U = K\b;
-    [Ldecomp,Udecomp] = lu(K);
+if (bc_t == 0)    
     Ldecomp2 = Ldecomp+epsilon*Mass;
     Udecomp2 = Udecomp+epsilon*Mass;
+    %Y = Ldecomp2\b;
+    %U = Udecomp2\Y;
     opts = struct('LT', {true});
     Y = linsolve(Ldecomp2,b,opts);
     opts = struct('UT', {true});
     U = linsolve(Udecomp2,Y,opts);
-    %Y = Ldecomp2\b;
-    %U = Udecomp2\Y;
-
+    
     vol = integrate(U,n);
     U = U-vol;
 
 elseif (bc_t==1)
-    [Ldecomp,Udecomp] = lu(A);
-%     U = A\b;
     Y = Ldecomp\b;
     U = Udecomp\Y;
 end

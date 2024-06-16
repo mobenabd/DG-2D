@@ -1,5 +1,5 @@
 function cost = OT_compute_cost(rho_0, Phi_xi, n)
-
+%%%%% compute transport cost (L2 wasserstein distance) %%%%%%%%%%%
 k = getGlobal_k();
 f1 = @(xi1,xi2) func1(xi1,xi2, rho_0, Phi_xi, n,k);
 

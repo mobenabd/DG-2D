@@ -31,8 +31,11 @@ dphiy_loc = @(x,y) li_x(x).* Lagrange(y,j+1,k,1);
 [Jac,~, ~] = jacobian_elem(1,n); %elem=1 (uniforme grid -> same jacobian)
 M = transpose(inv(Jac));
 
-dphix  = @(x,y) M(1,1)*dphix_loc(x,y) + M(1,2)*dphiy_loc(x,y);
-dphiy = @(x,y) M(2,1)*dphix_loc(x,y)  + M(2,2)*dphiy_loc(x,y);
+%dphix  = @(x,y) M(1,1)*dphix_loc(x,y) + M(1,2)*dphiy_loc(x,y);
+%dphiy = @(x,y) M(2,1)*dphix_loc(x,y)  + M(2,2)*dphiy_loc(x,y);
 
+
+dphix  = @(x,y) M(1,1)*dphix_loc(x,y);
+dphiy = @(x,y)  M(2,2)*dphiy_loc(x,y);
 
 end

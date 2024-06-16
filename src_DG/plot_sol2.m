@@ -36,14 +36,14 @@ for i=1:length(y)
 end
 
 
-        
-%subplot(121)
 f = figure(4);
 f.Position(3:4) = [700 500];
 surf(X,Y,M)%,'EdgeColor','none')
+xlabel('x'); ylabel('y'); 
 %mesh(X,Y,M)
-colorbar
-title('Sol Approx'); xlabel('x'); ylabel('y'); zlabel('u')
+%colorbar
+%title('Sol Approx'); 
+%zlabel('u')
 
 
 end

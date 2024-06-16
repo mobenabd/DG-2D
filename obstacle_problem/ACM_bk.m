@@ -10,12 +10,12 @@ idx = (num-1)*Nloc;
 if  (Eig_m == 0) %%solve obstacle problem/concavization
     for i=1:Nloc
         if ( LAP(idx+i) + f_projected(idx+i) + c*( U(idx+i) - g_projected(idx+i) ) < 0 ...%&& DET(idx+i) > 0)
-                && -DET(idx+i) + f_projected(idx+i) + c*( U(idx+i) - g_projected(idx+i))  < 0 )
+               )% && -DET(idx+i) + f_projected(idx+i) + c*( U(idx+i) - g_projected(idx+i))  < 0 )
             
             Bk(i) = c*g_projected(idx+i) - LAP(idx+i);
         else
-            Bk(i) = sqrt( LAP(idx+i)^2 + 2*( f_projected(idx+i)-DET(idx+i)) );
-            %Bk(i) =  f_projected(idx+i);
+            %Bk(i) = sqrt( LAP(idx+i)^2 + 2*( f_projected(idx+i)-DET(idx+i)) );
+            Bk(i) =  f_projected(idx+i);
         end
     end
 

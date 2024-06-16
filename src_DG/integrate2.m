@@ -1,6 +1,6 @@
 function val = integrate2(func, n)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Integrate a function f(x,y) defined on [0,1]^2
+%%% Integrate a function f(x,y) defined on [x0,xN]^2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

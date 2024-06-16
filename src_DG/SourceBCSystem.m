@@ -11,13 +11,7 @@ gdim = Nloc*n^2;               %global dimension matrix
 b    = zeros(gdim,1);
 
 f_source = @(x,y) f(x,y,t); %source term function
-f_bc = @(x,y) uexct(x,y,t);  %boundary condition function = exact solution
-
-
-
-%if (bc_t == 0)
-    %f_bc = @(x) -0.1/0.01;
-%end
+f_bc = @(x,y) uexct(x,y,t);  %boundary condition function 
 
 
 
@@ -117,7 +111,7 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-return
+
 if (bc_t==0)
     %% horizontal boundary edge
     verHor = 0;

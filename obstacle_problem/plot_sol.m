@@ -33,17 +33,17 @@ elseif ( exist('uexct','var'))
     end
 end
 
-U0 = M;
+
 
 f = figure (1);
 %f.Position
 f.Position(3:4) = [1100 600];
 subplot(122)
-if exist('g','var')
+% if ~exist('g','var')
     plot(x, M ,'DisplayName', 'Sol approx', 'Marker','.','MarkerSize', 10,'LineWidth',1)
-else
-    plot(x, M ,'DisplayName', 'Obstacle (projected)', 'Marker','.','MarkerSize', 10,'LineWidth',1, 'Color', "#D95319")
-end
+% else
+%     plot(x, M ,'DisplayName', 'Obstacle (projected)', 'Marker','.','MarkerSize', 10,'LineWidth',1, 'Color', "#D95319")
+% end
 hold on
 if exist('uexct','var')
     plot(x, Mexct, 'LineWidth',1 , 'DisplayName', 'Sol exacte')

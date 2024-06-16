@@ -17,20 +17,12 @@ elseif (ort==0)
     ss = 1;
 end
 
-
-if (verHor ==1 )   %vertical edge on x=+/-1
-    func = @(x,y) ss*fN(x);
-elseif (verHor == 0)  %horizontal edge on y=+/-1
-    func = @(x,y) ss*fN(y);
-end
-
-
-
+ 
 %[Jac,~, ~] = jacobian_elem(1,n) ; %(uniforme grid)
 %detJac11 = Jac(1,1);
 detJac11 = h/2;
 
-uexct_loc  =  func_mapping(func,n,num);
+uexct_loc  =  func_mapping(fN,n,num);
 
 for i=1:Nloc
     [phi, ~, ~] = basis(i,n,k);
