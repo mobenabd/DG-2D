@@ -1,5 +1,5 @@
 ## About
-Implementation of Interior Penalaty Discontinuous Glerkin methods (IP-DG) for diffusion problems using arbitrary high order Lagrange basis. 
+Implementation of Interior Penalty Discontinuous Galerkin methods (IP-DG) for diffusion problems using arbitrary high order Lagrange basis. 
 
 MATLAB R2019 at least is required.
 
