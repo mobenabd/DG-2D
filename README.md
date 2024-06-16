@@ -6,8 +6,8 @@ MATLAB R2019 at least is required.
 ## Quick start
 Clone the repository
 ```[bash]
-git clone 
-cd 
+git clone https://github.com/mobenabd/DG-2D.git
+cd DG-2D
 ```
 
 ## File structure
